@@ -2,64 +2,79 @@
 <html>
 <head>
 <title>SVORQ</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
+
 body {
   margin: 0;
   font-family: 'Georgia', serif;
-  background: #faf7f2;
+  background: #f8f6f2;
   color: #2c2c2c;
 }
 
+/* HEADER /
 header {
   text-align: center;
-  padding: 25px;
+  padding: 30px;
   font-size: 28px;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   color: #c9a646;
-  background: white;
-  border-bottom: 1px solid #eee;
+  background: #ffffff;
 }
 
+/ HERO SECTION /
 .hero {
   text-align: center;
   padding: 80px 20px;
 }
 
 .hero h1 {
-  font-size: 40px;
-  font-weight: 500;
+  font-size: 42px;
+  margin-bottom: 10px;
 }
 
 .hero p {
-  font-size: 16px;
   color: #777;
+  font-size: 18px;
 }
 
+/ COLLECTION /
+.section {
+  padding: 60px 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/ PRODUCTS GRID /
 .products {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 30px;
+  gap: 25px;
 }
 
 .card {
-  background: white;
-  border-radius: 12px;
-  margin: 15px;
+  background: #ffffff;
   padding: 20px;
-  width: 220px;
+  width: 250px;
+  border-radius: 12px;
   text-align: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
   transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-.card h3 {
-  font-weight: 500;
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .price {
@@ -68,27 +83,30 @@ header {
   margin: 10px 0;
 }
 
+/ BUTTON /
 button {
   background: #c9a646;
   color: white;
   border: none;
-  padding: 10px 18px;
+  padding: 10px 20px;
   border-radius: 25px;
   cursor: pointer;
 }
 
 button:hover {
-  background: #b8963c;
+  opacity: 0.9;
 }
 
+/ FOOTER */
 footer {
   text-align: center;
-  padding: 25px;
+  padding: 30px;
+  background: #ffffff;
+  margin-top: 50px;
   font-size: 14px;
-  background: white;
-  border-top: 1px solid #eee;
-  color: #777;
+  color: #888;
 }
+
 </style>
 </head>
 
@@ -97,35 +115,48 @@ footer {
 <header>SVORQ ✨</header>
 
 <div class="hero">
-<h1>Luxury Jewellery</h1>
-<p>Elegance • Style • Perfection</p>
+  <h1>Timeless Luxury Jewellery</h1>
+  <p>Elegance • Style • Perfection</p>
 </div>
 
-<h2 style="text-align:center;">Our Collection</h2>
+<div class="section">
+  <h2>Our Collection</h2>
 
-<div class="products">
+  <div class="products">
 
-<div class="card">
-<h3>Gold Necklace</h3>
-<p class="price">₹999</p>
-<button>Buy Now</button>
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200">
+      <h3>Gold Necklace</h3>
+      <div class="price">₹999</div>
+      <a href="https://wa.me/918309304255">
+        <button>Buy Now</button>
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200">
+      <h3>Diamond Ring</h3>
+      <div class="price">₹1499</div>
+      <a href="https://wa.me/918309304255">
+        <button>Buy Now</button>
+      </a>
+    </div>
+
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200">
+      <h3>Elegant Earrings</h3>
+      <div class="price">₹799</div>
+      <a href="https://wa.me/918309304255">
+        <button>Buy Now</button>
+      </a>
+    </div>
+
+  </div>
 </div>
 
-<div class="card">
-<h3>Diamond Ring</h3>
-<p class="price">₹799</p>
-<button>Buy Now</button>
-</div>
-
-<div class="card">
-<h3>Elegant Earrings</h3>
-<p class="price">₹499</p>
-<button>Buy Now</button>
-</div>
-
-</div>
-
-<footer>© 2026 SVORQ • All Rights Reserved</footer>
+<footer>
+  © 2026 SVORQ — Luxury Redefined
+</footer>
 
 </body>
 </html>
