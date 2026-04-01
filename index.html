@@ -8,6 +8,10 @@
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#c3996b">
+
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -20,7 +24,8 @@
 <!-- HEADER -->
 <header class="header">
   <div class="container">
-    <div class="logo">SVORQ ✨</div>
+    <!-- CLEAN LOGO -->
+    <div class="logo">SVORQ</div>
 
     <nav class="nav">
       <a href="#" onclick="filterCategory('all')">Shop All</a>
@@ -49,9 +54,17 @@
   <div class="hero-content">
     <h1>Timeless Luxury</h1>
     <p>Stainless Steel Jewellery • Elegant Fashion</p>
+
+    <!-- EXISTING BUTTON -->
     <button class="btn-primary" onclick="document.getElementById('products-section').scrollIntoView({behavior:'smooth'})">
       Shop Now
     </button>
+
+    <!-- NEW INSTALL BUTTON -->
+    <button class="btn-secondary" onclick="installApp()" style="margin-top:10px;">
+      Install App 📱
+    </button>
+
   </div>
 </section>
 
