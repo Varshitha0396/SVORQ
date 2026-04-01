@@ -1,4 +1,4 @@
-// PRODUCTS
+// PRODUCTS (same)
 let products = [
   { id: 1, name: "Celestial Hoop Earrings", price: 1299, category: "jewellery", img: "https://picsum.photos/id/201/600/600" },
   { id: 2, name: "Minimal Chain Necklace", price: 899, category: "jewellery", img: "https://picsum.photos/id/237/600/600" },
@@ -12,7 +12,7 @@ let products = [
 let cart = JSON.parse(localStorage.getItem('svorq_cart')) || [];
 let wishlist = JSON.parse(localStorage.getItem('svorq_wishlist')) || [];
 
-// SAVE FUNCTIONS
+// SAVE
 function saveCart() {
   localStorage.setItem('svorq_cart', JSON.stringify(cart));
   updateCartCount();
@@ -34,7 +34,7 @@ function updateWishlistCount() {
   document.getElementById('wishlist-count').textContent = wishlist.length;
 }
 
-// TOAST (REPLACES ALERT)
+// TOAST
 function showToast(message) {
   let toast = document.createElement("div");
   toast.innerText = message;
@@ -52,7 +52,7 @@ function showToast(message) {
   setTimeout(() => toast.remove(), 2000);
 }
 
-// PRODUCTS RENDER
+// PRODUCTS
 function renderProducts(filteredProducts = products) {
   const grid = document.getElementById('product-grid');
   grid.innerHTML = '';
@@ -78,16 +78,13 @@ function renderProducts(filteredProducts = products) {
   });
 }
 
-// CART FUNCTIONS
+// CART
 function addToCart(id) {
   const product = products.find(p => p.id === id);
   const existing = cart.find(item => item.id === id);
 
-  if (existing) {
-    existing.quantity++;
-  } else {
-    cart.push({ ...product, quantity: 1 });
-  }
+  if (existing) existing.quantity++;
+  else cart.push({ ...product, quantity: 1 });
 
   saveCart();
   showToast(`${product.name} added to cart`);
@@ -157,7 +154,7 @@ function clearCart() {
   }
 }
 
-// WHATSAPP CHECKOUT
+// CHECKOUT
 function checkout() {
   if (cart.length === 0) return showToast("Cart is empty!");
 
@@ -183,11 +180,8 @@ function toggleWishlist(id) {
   const product = products.find(p => p.id === id);
   const index = wishlist.findIndex(w => w.id === id);
 
-  if (index > -1) {
-    wishlist.splice(index, 1);
-  } else {
-    wishlist.push(product);
-  }
+  if (index > -1) wishlist.splice(index, 1);
+  else wishlist.push(product);
 
   saveWishlist();
   renderProducts();
@@ -216,21 +210,32 @@ function closeModal() {
   document.getElementById('quick-view-modal').style.display = 'none';
 }
 
-// CLOSE MODAL OUTSIDE CLICK
-window.onclick = function(e) {
-  const modal = document.getElementById('quick-view-modal');
-  if (e.target === modal) modal.style.display = "none";
-}
-
-// SEARCH & FILTER
+// SEARCH
 function searchProducts() {
   const term = document.getElementById('search-input').value.toLowerCase();
   renderProducts(products.filter(p => p.name.toLowerCase().includes(term)));
 }
 
+// FILTER
 function filterCategory(cat) {
   if (cat === 'all') return renderProducts(products);
   renderProducts(products.filter(p => p.category === cat));
+}
+
+// 👉 PWA INSTALL (NEW)
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+  } else {
+    showToast("Tap Share → Add to Home Screen 📱");
+  }
 }
 
 // INIT
