@@ -1,162 +1,102 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>SVORQ</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVORQ - Timeless Luxury</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      background: #f8f6f2;
-      color: #2c2c2c;
-    }
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 
-    /* HEADER /
-    header {
-      text-align: center;
-      padding: 25px;
-      font-size: 28px;
-      letter-spacing: 3px;
-      color: #c9a646;
-      background: white;
-      position: sticky;
-      top: 0;
-    }
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-    / HERO SECTION /
-    .hero {
-      text-align: center;
-      padding: 80px 20px;
-    }
-
-    .hero h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: #777;
-      font-size: 16px;
-    }
-
-    / SECTION /
-    .section {
-      padding: 30px 20px;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    / PRODUCT GRID /
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    / CARD /
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 15px;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .price {
-      color: #c9a646;
-      font-weight: bold;
-      margin: 10px 0;
-    }
-
-    button {
-      background: #c9a646;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 25px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    / FOOTER */
-    footer {
-      text-align: center;
-      padding: 30px;
-      margin-top: 40px;
-      font-size: 14px;
-      color: #888;
-      background: white;
-    }
-  </style>
-
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-<header>SVORQ ✨</header>
+<!-- HEADER -->
+<header class="header">
+  <div class="container">
+    <div class="logo">SVORQ ✨</div>
 
-<div class="hero">
-  <h1>Timeless Luxury Jewellery</h1>
-  <p>Elegance • Style • Perfection</p>
-</div>
+    <nav class="nav">
+      <a href="#" onclick="filterCategory('all')">Shop All</a>
+      <a href="#" onclick="filterCategory('jewellery')">Jewellery</a>
+      <a href="#" onclick="filterCategory('clothing')">Clothing</a>
+    </nav>
 
-<div class="section">
-  <h2>Our Collection</h2>
+    <div class="header-right">
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search..." onkeyup="searchProducts()">
+      </div>
 
-  <div class="products">
+      <i class="fas fa-heart" onclick="showWishlist()">
+        <span id="wishlist-count">0</span>
+      </i>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a">
-      <h3>Gold Necklace</h3>
-      <div class="price">₹999</div>
-      <a href="https://wa.me/918309304255">
-        <button>Buy Now</button>
-      </a>
+      <i class="fas fa-shopping-bag" onclick="toggleCart()">
+        <span id="cart-count">0</span>
+      </i>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Timeless Luxury</h1>
+    <p>Stainless Steel Jewellery • Elegant Fashion</p>
+    <button class="btn-primary" onclick="document.getElementById('products-section').scrollIntoView({behavior:'smooth'})">
+      Shop Now
+    </button>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products-section" class="products-section">
+  <div class="container">
+    <h2 class="section-title">Our Collection</h2>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+</section>
+
+<!-- CART -->
+<div id="cart-sidebar" class="cart-sidebar">
+  <div class="cart-header">
+    <h3>Your Cart (<span id="sidebar-cart-count">0</span>)</h3>
+    <i class="fas fa-times" onclick="toggleCart()"></i>
+  </div>
+
+  <div id="cart-items" class="cart-items"></div>
+
+  <div class="cart-footer">
+    <div class="cart-total">
+      Total: <strong id="cart-total">₹0</strong>
     </div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e">
-      <h3>Diamond Ring</h3>
-      <div class="price">₹1499</div>
-      <a href="https://wa.me/918309304255">
-        <button>Buy Now</button>
-      </a>
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0">
-      <h3>Elegant Earrings</h3>
-      <div class="price">₹799</div>
-      <a href="https://wa.me/918309304255">
-        <button>Buy Now</button>
-      </a>
-    </div>
-
+    <button class="btn-primary" onclick="checkout()">Checkout (WhatsApp)</button>
+    <button class="btn-secondary" onclick="clearCart()">Clear Cart</button>
   </div>
 </div>
 
-<footer>
-  © 2026 SVORQ — Luxury Redefined
-</footer>
+<!-- MODAL -->
+<div id="quick-view-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/918309304255" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- JS FILE -->
+<script src="script.js"></script>
 
 </body>
 </html>
