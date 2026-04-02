@@ -1,4 +1,4 @@
-// PRODUCTS (same)
+// PRODUCTS
 let products = [
   { id: 1, name: "Celestial Hoop Earrings", price: 1299, category: "jewellery", img: "https://picsum.photos/id/201/600/600" },
   { id: 2, name: "Minimal Chain Necklace", price: 899, category: "jewellery", img: "https://picsum.photos/id/237/600/600" },
@@ -34,7 +34,7 @@ function updateWishlistCount() {
   document.getElementById('wishlist-count').textContent = wishlist.length;
 }
 
-// TOAST
+// TOAST (Improved)
 function showToast(message) {
   let toast = document.createElement("div");
   toast.innerText = message;
@@ -44,8 +44,9 @@ function showToast(message) {
   toast.style.transform = "translateX(-50%)";
   toast.style.background = "#000";
   toast.style.color = "#fff";
-  toast.style.padding = "10px 20px";
+  toast.style.padding = "12px 22px";
   toast.style.borderRadius = "30px";
+  toast.style.fontSize = "14px";
   toast.style.zIndex = "9999";
 
   document.body.appendChild(toast);
@@ -222,21 +223,33 @@ function filterCategory(cat) {
   renderProducts(products.filter(p => p.category === cat));
 }
 
-// 👉 PWA INSTALL (NEW)
+// 👉 PWA INSTALL (IMPROVED)
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
+
+  const btn = document.getElementById("install-btn");
+  if (btn) btn.style.display = "inline-block";
 });
 
 function installApp() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+    });
   } else {
     showToast("Tap Share → Add to Home Screen 📱");
   }
 }
+
+// LOADER
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  if (loader) loader.style.display = "none";
+});
 
 // INIT
 document.addEventListener('DOMContentLoaded', () => {
