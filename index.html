@@ -12,6 +12,12 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#c3996b">
 
+  <!-- iOS APP SUPPORT (🔥 IMPORTANT) -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="SVORQ">
+  <link rel="apple-touch-icon" href="icon.png">
+
   <!-- Smooth Scroll -->
   <style>
     html {
@@ -28,20 +34,25 @@
 
 <body>
 
+<!-- 🔥 LOADER (NEW) -->
+<div id="loader">
+  <h1>SVORQ</h1>
+</div>
+
 <!-- HEADER -->
 <header class="header">
   <div class="container">
 
     <!-- LOGO -->
     <div class="logo">
-  <img src="logo.png" alt="SVORQ Logo" class="logo-img">
-</div>
+      <img src="logo.png" alt="SVORQ Logo" class="logo-img">
+    </div>
 
     <!-- NAV -->
     <nav class="nav">
       <a href="javascript:void(0)" onclick="filterCategory('all')">Shop All</a>
       <a href="javascript:void(0)" onclick="filterCategory('jewellery')">Jewellery</a>
-      <a href="#" onclick="filterCategory('fashion')">Fashion</a>
+      <a href="javascript:void(0)" onclick="filterCategory('fashion')">Fashion</a>
     </nav>
 
     <!-- RIGHT -->
@@ -74,9 +85,11 @@
       Shop Now
     </button>
 
-    <button class="btn-secondary" onclick="installApp()">
+    <!-- 🔥 UPDATED INSTALL BUTTON -->
+    <button id="install-btn" class="btn-secondary" onclick="installApp()" style="display:none;">
       Install App 📱
     </button>
+
   </div>
 </section>
 
