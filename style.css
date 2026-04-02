@@ -10,6 +10,7 @@ body {
   background: #faf9f6;
   color: #222;
   -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none; /* NEW */
 }
 
 /* CONTAINER */
@@ -32,8 +33,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.2rem 20px;
-  flex-wrap: wrap; /* FIX */
+  padding: 1rem 15px; /* UPDATED */
+  gap: 10px; /* NEW */
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -46,9 +48,8 @@ body {
 /* NAV */
 .nav {
   display: flex;
-  gap: 15px;
-  flex-wrap: nowrap; /* FIX */
-  overflow-x: auto; /* FIX */
+  gap: 12px;
+  flex-wrap: nowrap;
 }
 
 .nav a {
@@ -56,6 +57,8 @@ body {
   color: #333;
   font-weight: 500;
   cursor: pointer;
+  white-space: nowrap; /* 🔥 FIX */
+  font-size: 14px; /* NEW */
 }
 
 .nav a:hover {
@@ -66,9 +69,9 @@ body {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 15px;
-  flex-wrap: wrap; /* FIX */
-  justify-content: center; /* FIX */
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .header-right i {
@@ -81,11 +84,13 @@ body {
   margin-left: 3px;
 }
 
+/* SEARCH FIX */
 .search-container input {
-  padding: 8px 14px;
+  padding: 6px 10px;
   border: 1px solid #ddd;
   border-radius: 30px;
-  max-width: 100%; /* FIX */
+  width: 120px; /* 🔥 FIX */
+  font-size: 14px;
 }
 
 /* HERO */
@@ -98,6 +103,14 @@ body {
   justify-content: center;
   text-align: center;
   color: white;
+}
+
+/* HERO CONTENT FIX */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 .hero h1 {
@@ -123,24 +136,22 @@ button:active {
   background: #c3996b;
   color: white;
   border: none;
-  padding: 12px 30px;
-  border-radius: 30px;
+  padding: 12px 26px;
+  border-radius: 40px; /* UPDATED */
   cursor: pointer;
 }
 
 .btn-primary:hover {
   background: #a88252;
-  transform: scale(1.05);
 }
 
 .btn-secondary {
   background: transparent;
   color: #c3996b;
   border: 2px solid #c3996b;
-  padding: 10px 25px;
-  border-radius: 30px;
+  padding: 12px 26px;
+  border-radius: 40px; /* UPDATED */
   cursor: pointer;
-  margin-top: 10px;
 }
 
 .btn-secondary:hover {
@@ -181,11 +192,6 @@ button:active {
   width: 100%;
   height: 250px;
   object-fit: cover;
-  transition: 0.3s;
-}
-
-.product-card:hover img {
-  transform: scale(1.05);
 }
 
 .product-info {
@@ -196,20 +202,6 @@ button:active {
   color: #c3996b;
   font-weight: bold;
   margin: 8px 0;
-}
-
-/* PRODUCT BUTTONS */
-.product-card button {
-  padding: 8px 15px;
-  border: none;
-  cursor: pointer;
-  border-radius: 20px;
-  margin-top: 5px;
-}
-
-.product-card button:hover {
-  background: #c3996b;
-  color: white;
 }
 
 /* CART SIDEBAR */
@@ -230,28 +222,6 @@ button:active {
   right: 0;
 }
 
-.cart-items {
-  padding: 15px;
-}
-
-.cart-items p {
-  text-align: center;
-  color: #888;
-  font-size: 14px;
-}
-
-.cart-item {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.cart-item img {
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
-}
-
 /* MODAL */
 .modal {
   display: none;
@@ -263,14 +233,6 @@ button:active {
   background: rgba(0,0,0,0.7);
   justify-content: center;
   align-items: center;
-}
-
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 500px;
 }
 
 /* WHATSAPP BUTTON */
@@ -287,39 +249,21 @@ button:active {
   align-items: center;
   justify-content: center;
   font-size: 28px;
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
 }
 
-/* =========================
-   MOBILE FIX
-   ========================= */
+/* MOBILE FIX */
 @media (max-width: 768px) {
 
-  .header .container {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .logo {
-    text-align: center;
-  }
-
   .nav {
-    justify-content: center;
+    gap: 8px;
   }
 
-  .header-right {
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .search-container {
-    width: 100%;
+  .nav a {
+    font-size: 13px;
   }
 
   .search-container input {
-    width: 100%;
+    width: 100px;
   }
 
 }
