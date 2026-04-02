@@ -2,10 +2,10 @@
 let products = [
   { id: 1, name: "Celestial Hoop Earrings", price: 1299, category: "jewellery", img: "https://picsum.photos/id/201/600/600" },
   { id: 2, name: "Minimal Chain Necklace", price: 899, category: "jewellery", img: "https://picsum.photos/id/237/600/600" },
-  { id: 3, name: "Oversized Linen Shirt", price: 2199, category: "clothing", img: "https://picsum.photos/id/1011/600/600" },
-  { id: 4, name: "Wide Leg Trousers", price: 1899, category: "clothing", img: "https://picsum.photos/id/106/600/600" },
+  { id: 3, name: "Oversized Linen Shirt", price: 2199, category: "fashion", img: "https://picsum.photos/id/1011/600/600" },
+  { id: 4, name: "Wide Leg Trousers", price: 1899, category: "fashion", img: "https://picsum.photos/id/106/600/600" },
   { id: 5, name: "Gold Plated Bangle Set", price: 1499, category: "jewellery", img: "https://picsum.photos/id/180/600/600" },
-  { id: 6, name: "Elegant Silk Kurta", price: 2599, category: "clothing", img: "https://picsum.photos/id/201/600/600" }
+  { id: 6, name: "Elegant Silk Kurta", price: 2599, category: "fashion", img: "https://picsum.photos/id/201/600/600" }
 ];
 
 // STORAGE
