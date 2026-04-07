@@ -12,7 +12,7 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#c3996b">
 
-  <!-- iOS APP SUPPORT (🔥 IMPORTANT) -->
+  <!-- iOS APP SUPPORT -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="SVORQ">
@@ -34,7 +34,7 @@
 
 <body>
 
-<!-- 🔥 LOADER (NEW) -->
+<!-- LOADER -->
 <div id="loader">
   <h1>SVORQ</h1>
 </div>
@@ -43,21 +43,17 @@
 <header class="header">
   <div class="container">
 
-    <!-- LOGO -->
     <div class="logo">
       <img src="logo.png" alt="SVORQ Logo" class="logo-img">
     </div>
 
-    <!-- NAV -->
     <nav class="nav">
       <a href="javascript:void(0)" onclick="filterCategory('all')">Shop All</a>
       <a href="javascript:void(0)" onclick="filterCategory('jewellery')">Jewellery</a>
       <a href="javascript:void(0)" onclick="filterCategory('fashion')">Fashion</a>
     </nav>
 
-    <!-- RIGHT -->
     <div class="header-right">
-
       <div class="search-container">
         <input type="text" id="search-input" placeholder="Search..." onkeyup="searchProducts()">
       </div>
@@ -69,7 +65,6 @@
       <i class="fas fa-shopping-bag" onclick="toggleCart()">
         <span id="cart-count">0</span>
       </i>
-
     </div>
 
   </div>
@@ -79,18 +74,28 @@
 <section class="hero">
   <div class="hero-content">
     <h1>Timeless Luxury</h1>
-    <p>Stainless Steel Jewellery • Elegant Fashion</p>
+    <p>Luxury Jewellery Crafted for Everyday Elegance ✨</p>
 
     <button class="btn-primary" onclick="document.getElementById('products-section').scrollIntoView({behavior:'smooth'})">
       Shop Now
     </button>
 
-    <!-- 🔥 UPDATED INSTALL BUTTON -->
     <button id="install-btn" class="btn-secondary" onclick="installApp()" style="display:none;">
       Install App 📱
     </button>
-
   </div>
+</section>
+
+<!-- 🔥 CATEGORY BAR (NEW PREMIUM FEATURE) -->
+<section class="categories">
+  <button onclick="filterCategory('all')">All</button>
+  <button onclick="filterCategory('layered')">Layered Chains</button>
+  <button onclick="filterCategory('pendant')">Pendant Necklaces</button>
+  <button onclick="filterCategory('statement')">Statement</button>
+  <button onclick="filterCategory('earrings')">Earrings</button>
+  <button onclick="filterCategory('bracelet')">Bracelets</button>
+  <button onclick="filterCategory('rings')">Rings</button>
+  <button onclick="filterCategory('set')">Jewellery Sets</button>
 </section>
 
 <!-- PRODUCTS -->
