@@ -12,18 +12,10 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#c3996b">
 
-  <!-- iOS APP SUPPORT -->
+  <!-- iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="SVORQ">
   <link rel="apple-touch-icon" href="icon.png">
-
-  <!-- Smooth Scroll -->
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -43,19 +35,24 @@
 <header class="header">
   <div class="container">
 
+    <!-- LOGO -->
     <div class="logo">
       <img src="logo.png" alt="SVORQ Logo" class="logo-img">
     </div>
 
+    <!-- NAV -->
     <nav class="nav">
-      <a href="javascript:void(0)" onclick="filterCategory('all')">Shop All</a>
-      <a href="javascript:void(0)" onclick="filterCategory('jewellery')">Jewellery</a>
-      <a href="javascript:void(0)" onclick="filterCategory('fashion')">Fashion</a>
+      <a onclick="filterCategory('all')">Shop All</a>
+      <a onclick="filterCategory('layered')">Layered</a>
+      <a onclick="filterCategory('earrings')">Earrings</a>
+      <a onclick="filterCategory('rings')">Rings</a>
     </nav>
 
+    <!-- RIGHT -->
     <div class="header-right">
+
       <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search..." onkeyup="searchProducts()">
+        <input type="text" id="search-input" placeholder="Search jewellery..." onkeyup="searchProducts()">
       </div>
 
       <i class="fas fa-heart" onclick="showWishlist()">
@@ -65,43 +62,50 @@
       <i class="fas fa-shopping-bag" onclick="toggleCart()">
         <span id="cart-count">0</span>
       </i>
+
     </div>
 
   </div>
 </header>
 
-<!-- HERO -->
+<!-- HERO (🔥 PREMIUM FIXED) -->
 <section class="hero">
+  <div class="hero-overlay"></div>
+
   <div class="hero-content">
     <h1>Timeless Luxury</h1>
     <p>Luxury Jewellery Crafted for Everyday Elegance ✨</p>
 
-    <button class="btn-primary" onclick="document.getElementById('products-section').scrollIntoView({behavior:'smooth'})">
-      Shop Now
-    </button>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="document.getElementById('products-section').scrollIntoView({behavior:'smooth'})">
+        Shop Now
+      </button>
 
-    <button id="install-btn" class="btn-secondary" onclick="installApp()" style="display:none;">
-      Install App 📱
-    </button>
+      <button id="install-btn" class="btn-secondary" onclick="installApp()" style="display:none;">
+        Install App
+      </button>
+    </div>
   </div>
 </section>
 
-<!-- 🔥 CATEGORY BAR (NEW PREMIUM FEATURE) -->
+<!-- 🔥 CATEGORY BAR -->
 <section class="categories">
   <button onclick="filterCategory('all')">All</button>
   <button onclick="filterCategory('layered')">Layered Chains</button>
-  <button onclick="filterCategory('pendant')">Pendant Necklaces</button>
+  <button onclick="filterCategory('pendant')">Pendant</button>
   <button onclick="filterCategory('statement')">Statement</button>
   <button onclick="filterCategory('earrings')">Earrings</button>
   <button onclick="filterCategory('bracelet')">Bracelets</button>
   <button onclick="filterCategory('rings')">Rings</button>
-  <button onclick="filterCategory('set')">Jewellery Sets</button>
+  <button onclick="filterCategory('set')">Sets</button>
 </section>
 
 <!-- PRODUCTS -->
 <section id="products-section" class="products-section">
   <div class="container">
     <h2 class="section-title">Our Collection</h2>
+
+    <!-- GRID -->
     <div class="product-grid" id="product-grid"></div>
   </div>
 </section>
@@ -125,7 +129,7 @@
   </div>
 </div>
 
-<!-- MODAL -->
+<!-- MODAL (FOR SLIDER) -->
 <div id="quick-view-modal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
@@ -133,7 +137,7 @@
   </div>
 </div>
 
-<!-- WHATSAPP FLOAT -->
+<!-- WHATSAPP -->
 <a href="https://wa.me/918309304255" class="whatsapp-float" target="_blank">
   <i class="fab fa-whatsapp"></i>
 </a>
