@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SVORQ - Timeless Luxury</title>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
   <!-- PWA -->
@@ -35,21 +34,38 @@
 <header class="header">
   <div class="container header-flex">
 
-    <!-- LOGO -->
+    <!-- LOGO (UNCHANGED) -->
     <div class="logo">
       <img src="logo.png" alt="SVORQ Logo" class="logo-img">
     </div>
 
-    <!-- NAV -->
+    <!-- NAV (FIXED STRUCTURE) -->
     <nav class="nav">
+
       <a onclick="filterCategory('all')">Shop</a>
-      <a onclick="filterCategory('layered')">Layered</a>
-      <a onclick="filterCategory('earrings')">Earrings</a>
-      <a onclick="filterCategory('rings')">Rings</a>
+
+      <!-- JEWELLERY DROPDOWN -->
+      <div class="dropdown">
+        <a class="dropdown-toggle">Jewellery</a>
+
+        <div class="dropdown-menu">
+          <a onclick="filterCategory('layered')">Layered Chains</a>
+          <a onclick="filterCategory('pendant')">Pendant Necklaces</a>
+          <a onclick="filterCategory('earrings')">Earrings</a>
+          <a onclick="filterCategory('rings')">Rings</a>
+          <a onclick="filterCategory('bracelet')">Bracelets</a>
+          <a onclick="filterCategory('anklets')">Anklets</a>
+          <a onclick="filterCategory('statement')">Statement</a>
+        </div>
+      </div>
+
+      <a onclick="filterCategory('fashion')">Fashion</a>
+
     </nav>
 
     <!-- RIGHT -->
     <div class="header-right">
+
       <i class="fas fa-search"></i>
 
       <i class="fas fa-heart" onclick="showWishlist()">
@@ -59,37 +75,39 @@
       <i class="fas fa-shopping-bag" onclick="toggleCart()">
         <span id="cart-count">0</span>
       </i>
+
     </div>
 
   </div>
 </header>
 
-<!-- HERO (🔥 FIXED PREMIUM) -->
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-overlay"></div>
-
   <div class="hero-content">
     <h1>Timeless Luxury</h1>
     <p>Luxury Jewellery Crafted for Everyday Elegance ✨</p>
 
-    <button class="btn-primary" onclick="document.getElementById('products-section').scrollIntoView({behavior:'smooth'})">
-      Shop Collection
+    <button class="btn-primary"
+      onclick="document.getElementById('products-section').scrollIntoView({behavior:'smooth'})">
+      Shop Now
+    </button>
+
+    <!-- INSTALL BUTTON -->
+    <button id="install-btn" class="btn-secondary" onclick="installApp()" style="display:none;">
+      Install App 📱
     </button>
   </div>
 </section>
 
-<!-- 🔥 CATEGORY BAR -->
+<!-- CATEGORY BAR (SUBCATEGORY STYLE) -->
 <section class="categories">
-  <div class="category-scroll">
-    <button onclick="filterCategory('all')">All</button>
-    <button onclick="filterCategory('layered')">Layered</button>
-    <button onclick="filterCategory('pendant')">Pendant</button>
-    <button onclick="filterCategory('statement')">Statement</button>
-    <button onclick="filterCategory('earrings')">Earrings</button>
-    <button onclick="filterCategory('bracelet')">Bracelets</button>
-    <button onclick="filterCategory('rings')">Rings</button>
-    <button onclick="filterCategory('set')">Sets</button>
-  </div>
+  <button onclick="filterCategory('all')">All</button>
+  <button onclick="filterCategory('layered')">Layered</button>
+  <button onclick="filterCategory('pendant')">Pendant</button>
+  <button onclick="filterCategory('earrings')">Earrings</button>
+  <button onclick="filterCategory('rings')">Rings</button>
+  <button onclick="filterCategory('bracelet')">Bracelets</button>
+  <button onclick="filterCategory('statement')">Statement</button>
 </section>
 
 <!-- PRODUCTS -->
@@ -107,32 +125,27 @@
     <i class="fas fa-times" onclick="toggleCart()"></i>
   </div>
 
-  <div id="cart-items" class="cart-items"></div>
+  <div id="cart-items"></div>
 
   <div class="cart-footer">
-    <div class="cart-total">
-      Total: <strong id="cart-total">₹0</strong>
-    </div>
-
-    <button class="btn-primary" onclick="checkout()">Checkout (WhatsApp)</button>
-    <button class="btn-secondary" onclick="clearCart()">Clear Cart</button>
+    <strong>Total: ₹<span id="cart-total">0</span></strong>
+    <button class="btn-primary" onclick="checkout()">Checkout</button>
   </div>
 </div>
 
-<!-- MODAL (SLIDER READY) -->
+<!-- MODAL -->
 <div id="quick-view-modal" class="modal">
   <div class="modal-content">
-    <span class="close" onclick="closeModal()">&times;</span>
+    <span onclick="closeModal()" class="close">&times;</span>
     <div id="modal-body"></div>
   </div>
 </div>
 
 <!-- WHATSAPP -->
-<a href="https://wa.me/918309304255" class="whatsapp-float" target="_blank">
+<a href="https://wa.me/918309304255" class="whatsapp-float">
   <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- JS -->
 <script src="script.js"></script>
 
 </body>
