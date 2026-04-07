@@ -1,271 +1,145 @@
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVORQ - Timeless Luxury</title>
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: #faf9f6;
-  color: #222;
-  -webkit-tap-highlight-color: transparent;
-  overscroll-behavior: none;
-}
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 
-/* CONTAINER */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#c3996b">
 
-/* HEADER */
-.header {
-  background: #fff;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+  <!-- iOS APP SUPPORT -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="SVORQ">
+  <link rel="apple-touch-icon" href="icon.png">
 
-.header .container {
-  display: flex;
-  flex-direction: column; /* 🔥 FIXED STRUCTURE */
-  align-items: center;
-  padding: 6px 0; /* 🔥 reduced height */
-  gap: 8px;
-}
+  <!-- Smooth Scroll -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 
-/* LOGO */
-.logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-.logo-img {
-  height: 85px; /* 🔥 balanced size */
-  width: auto;
-}
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
 
-/* NAV */
-.nav {
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-}
+<body>
 
-.nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-  font-size: 14px;
-}
+<!-- LOADER -->
+<div id="loader">
+  <h1>SVORQ</h1>
+</div>
 
-.nav a:hover {
-  color: #c3996b;
-}
+<!-- HEADER -->
+<header class="header">
+  <div class="container">
 
-/* HEADER RIGHT */
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  justify-content: center;
-}
+    <div class="logo">
+      <img src="logo.png" alt="SVORQ Logo" class="logo-img">
+    </div>
 
-/* SEARCH */
-.search-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
+    <nav class="nav">
+      <a href="javascript:void(0)" onclick="filterCategory('all')">Shop All</a>
+      <a href="javascript:void(0)" onclick="filterCategory('jewellery')">Jewellery</a>
+      <a href="javascript:void(0)" onclick="filterCategory('fashion')">Fashion</a>
+    </nav>
 
-.search-container input {
-  padding: 8px 14px;
-  border: 1px solid #ddd;
-  border-radius: 30px;
-  width: 85%;
-  max-width: 350px;
-  font-size: 14px;
-}
+    <div class="header-right">
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search..." onkeyup="searchProducts()">
+      </div>
 
-/* HERO */
-.hero {
-  height: 90vh;
-  background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-  url('https://images.unsplash.com/photo-1617038220319-276d3cfab638') center/cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
-}
+      <i class="fas fa-heart" onclick="showWishlist()">
+        <span id="wishlist-count">0</span>
+      </i>
 
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
+      <i class="fas fa-shopping-bag" onclick="toggleCart()">
+        <span id="cart-count">0</span>
+      </i>
+    </div>
 
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.2rem;
-}
+  </div>
+</header>
 
-.hero p {
-  font-size: 1.1rem;
-}
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Timeless Luxury</h1>
+    <p>Luxury Jewellery Crafted for Everyday Elegance ✨</p>
 
-/* BUTTONS */
-button {
-  transition: all 0.2s ease;
-}
+    <button class="btn-primary" onclick="document.getElementById('products-section').scrollIntoView({behavior:'smooth'})">
+      Shop Now
+    </button>
 
-button:active {
-  transform: scale(0.95);
-}
+    <button id="install-btn" class="btn-secondary" onclick="installApp()" style="display:none;">
+      Install App 📱
+    </button>
+  </div>
+</section>
 
-.btn-primary {
-  background: #c3996b;
-  color: white;
-  border: none;
-  padding: 12px 26px;
-  border-radius: 40px;
-  cursor: pointer;
-}
+<!-- 🔥 CATEGORY BAR (NEW PREMIUM FEATURE) -->
+<section class="categories">
+  <button onclick="filterCategory('all')">All</button>
+  <button onclick="filterCategory('layered')">Layered Chains</button>
+  <button onclick="filterCategory('pendant')">Pendant Necklaces</button>
+  <button onclick="filterCategory('statement')">Statement</button>
+  <button onclick="filterCategory('earrings')">Earrings</button>
+  <button onclick="filterCategory('bracelet')">Bracelets</button>
+  <button onclick="filterCategory('rings')">Rings</button>
+  <button onclick="filterCategory('set')">Jewellery Sets</button>
+</section>
 
-.btn-primary:hover {
-  background: #a88252;
-}
+<!-- PRODUCTS -->
+<section id="products-section" class="products-section">
+  <div class="container">
+    <h2 class="section-title">Our Collection</h2>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+</section>
 
-.btn-secondary {
-  background: transparent;
-  color: #c3996b;
-  border: 2px solid #c3996b;
-  padding: 12px 26px;
-  border-radius: 40px;
-  cursor: pointer;
-}
+<!-- CART -->
+<div id="cart-sidebar" class="cart-sidebar">
+  <div class="cart-header">
+    <h3>Your Cart (<span id="sidebar-cart-count">0</span>)</h3>
+    <i class="fas fa-times" onclick="toggleCart()"></i>
+  </div>
 
-.btn-secondary:hover {
-  background: #c3996b;
-  color: white;
-}
+  <div id="cart-items" class="cart-items"></div>
 
-/* SECTION TITLE */
-.section-title {
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 2.3rem;
-  margin: 50px 0;
-}
+  <div class="cart-footer">
+    <div class="cart-total">
+      Total: <strong id="cart-total">₹0</strong>
+    </div>
 
-/* PRODUCTS */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
+    <button class="btn-primary" onclick="checkout()">Checkout (WhatsApp)</button>
+    <button class="btn-secondary" onclick="clearCart()">Clear Cart</button>
+  </div>
+</div>
 
-.product-card {
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-  text-align: center;
-  padding-bottom: 15px;
-}
+<!-- MODAL -->
+<div id="quick-view-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
 
-.product-card:hover {
-  transform: translateY(-8px);
-}
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/918309304255" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
 
-.product-card img {
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-}
+<!-- JS -->
+<script src="script.js"></script>
 
-.product-info {
-  padding: 15px;
-}
-
-.price {
-  color: #c3996b;
-  font-weight: bold;
-  margin: 8px 0;
-}
-
-/* CART SIDEBAR */
-.cart-sidebar {
-  position: fixed;
-  top: 0;
-  right: -400px;
-  width: 350px;
-  height: 100%;
-  background: white;
-  box-shadow: -5px 0 20px rgba(0,0,0,0.2);
-  transition: right 0.3s ease;
-  z-index: 2000;
-  overflow-y: auto;
-}
-
-.cart-sidebar.open {
-  right: 0;
-}
-
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.7);
-  justify-content: center;
-  align-items: center;
-}
-
-/* WHATSAPP */
-.whatsapp-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  color: white;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-
-  .logo-img {
-    height: 70px;
-  }
-
-  .nav a {
-    font-size: 13px;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-}
+</body>
+</html>
