@@ -1,4 +1,4 @@
-/* RESET */
+/* RESET /
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +16,7 @@ body {
   color: #222;
 }
 
-/* CONTAINER */
+/ CONTAINER /
 .container {
   width: 100%;
   max-width: 1200px;
@@ -24,7 +24,7 @@ body {
   padding: 0 16px;
 }
 
-/* ================= HEADER ================= */
+/ ================= HEADER ================= /
 
 .header {
   background: #fff;
@@ -34,7 +34,6 @@ body {
   border-bottom: 1px solid #eee;
 }
 
-/* 🔥 CLEAN HEADER GRID */
 .header-clean {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -42,12 +41,12 @@ body {
   height: 75px;
 }
 
-/* LOGO LEFT */
+/ LOGO /
 .logo-img {
-  height: 60px;
+  height: 55px;
 }
 
-/* NAV CENTER */
+/ NAV CENTER /
 .nav-center {
   display: flex;
   justify-content: center;
@@ -59,20 +58,23 @@ body {
   cursor: pointer;
   color: #333;
   font-weight: 500;
+  transition: 0.3s;
 }
 
 .nav-center a:hover {
   color: #c3996b;
 }
 
-/* RIGHT ICONS */
+/ RIGHT ICONS /
 .header-right {
   display: flex;
   gap: 16px;
   align-items: center;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-/* ================= DROPDOWN ================= */
+/ ================= DROPDOWN ================= /
 
 .dropdown {
   position: relative;
@@ -81,17 +83,24 @@ body {
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 30px;
+  top: 32px;
   left: 0;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   padding: 10px;
   min-width: 180px;
+  z-index: 999;
 }
 
 .dropdown-menu.show {
   display: block;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .dropdown-menu a {
@@ -106,7 +115,7 @@ body {
   border-radius: 6px;
 }
 
-/* ================= HERO ================= */
+/ ================= HERO ================= /
 
 .hero {
   height: 60vh;
@@ -124,14 +133,15 @@ body {
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
+  font-size: 2.6rem;
 }
 
 .hero p {
   margin: 10px 0;
+  font-size: 14px;
 }
 
-/* ================= BUTTONS ================= */
+/ ================= BUTTONS ================= /
 
 .btn-primary {
   background: #c3996b;
@@ -140,10 +150,12 @@ body {
   padding: 12px 24px;
   border-radius: 40px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .btn-primary:hover {
   background: #a88252;
+  transform: scale(1.03);
 }
 
 .btn-secondary {
@@ -154,7 +166,7 @@ body {
   background: transparent;
 }
 
-/* ================= CATEGORY ================= */
+/ ================= CATEGORY ================= /
 
 .categories {
   display: flex;
@@ -175,6 +187,7 @@ body {
   font-size: 13px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.05);
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .categories button:hover {
@@ -182,12 +195,13 @@ body {
   color: white;
 }
 
-/* ================= PRODUCTS ================= */
+/ ================= PRODUCTS ================= /
 
 .section-title {
   text-align: center;
   margin: 40px 0 20px;
   font-family: 'Playfair Display', serif;
+  font-size: 2rem;
 }
 
 .product-grid {
@@ -196,13 +210,18 @@ body {
   gap: 16px;
 }
 
-/* CARD */
+/ CARD /
 .product-card {
   background: white;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 25px rgba(0,0,0,0.06);
   position: relative;
+  transition: 0.3s;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
 }
 
 .product-card img {
@@ -211,7 +230,7 @@ body {
   object-fit: cover;
 }
 
-/* BADGE */
+/ BADGE /
 .badge {
   position: absolute;
   top: 10px;
@@ -223,36 +242,39 @@ body {
   border-radius: 20px;
 }
 
-/* ❤️ WISHLIST */
+/ ❤️ WISHLIST (FIXED CLEAN) /
 .wishlist-icon {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: white;
-  width: 32px;
-  height: 32px;
+  background: rgba(255,255,255,0.95);
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #aaa;
+  color: #bbb; / default WHITE LOOK /
+  font-size: 16px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .wishlist-icon.active {
   color: red;
 }
 
-/* INFO */
+/ INFO /
 .product-info {
   padding: 12px;
 }
 
 .product-info h3 {
   font-size: 14px;
+  margin-bottom: 5px;
 }
 
-/* PRICE */
+/ PRICE /
 .price {
   font-weight: 600;
 }
@@ -261,9 +283,10 @@ body {
   text-decoration: line-through;
   color: #aaa;
   font-size: 12px;
+  margin-left: 6px;
 }
 
-/* ================= CART ================= */
+/ ================= CART ================= /
 
 .cart-sidebar {
   position: fixed;
@@ -280,7 +303,7 @@ body {
   right: 0;
 }
 
-/* ================= MODAL ================= */
+/ ================= MODAL ================= /
 
 .modal {
   display: none;
@@ -302,22 +325,24 @@ body {
   border-radius: 12px;
 }
 
-/* ================= WHATSAPP ================= */
+/ ================= WHATSAPP ================= /
 
 .whatsapp-float {
   position: fixed;
-  bottom: 80px; /* 🔥 FIX OVERLAP */
+  bottom: 80px;
   right: 16px;
   background: #25D366;
-  width: 50px;
-  height: 50px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+  font-size: 22px;
 }
 
-/* ================= LOADER ================= */
+/ ================= LOADER ================= /
 
 #loader {
   position: fixed;
@@ -332,9 +357,16 @@ body {
 
 .loader-logo {
   width: 120px;
+  animation: pulse 1.5s infinite;
 }
 
-/* ================= MOBILE ================= */
+@keyframes pulse {
+  0% { opacity: 0.6; transform: scale(0.95); }
+  50% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.6; transform: scale(0.95); }
+}
+
+/ ================= MOBILE ================= */
 
 @media (max-width: 768px) {
 
@@ -343,11 +375,14 @@ body {
   }
 
   .logo-img {
-    height: 50px;
+    height: 45px;
   }
 
   .hero h1 {
     font-size: 2rem;
   }
 
+  .product-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
