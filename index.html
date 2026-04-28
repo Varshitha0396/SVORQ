@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <!-- 🔥 CRITICAL FIX (prevents zoom-out bug) -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- ✅ MOBILE FIX -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>SVORQ - Timeless Luxury</title>
 
@@ -28,22 +28,30 @@
 
 <body>
 
-<!-- 🔥 LOADER FIX (prevents layout shrink bug) -->
+<!-- LOADER -->
 <div id="loader">
-  <img src="logo.png" alt="SVORQ Logo" class="loader-logo">
+  <img src="logo.png" class="loader-logo">
 </div>
 
-<!-- HEADER -->
+<!-- 🔥 CLEAN HEADER -->
 <header class="header">
-  <div class="container header-row">
+  <div class="container header-clean">
 
-    <!-- LEFT NAV -->
-    <nav class="nav-left">
+    <!-- LEFT: LOGO -->
+    <div class="logo">
+      <img src="logo.png" class="logo-img">
+    </div>
+
+    <!-- CENTER: NAV -->
+    <nav class="nav-center">
+
       <a onclick="filterCategory('all')">Shop</a>
 
+      <!-- DROPDOWN -->
       <div class="dropdown">
-        <a class="dropdown-toggle">Jewellery</a>
-        <div class="dropdown-menu">
+        <a onclick="toggleDropdown()">Jewellery ▾</a>
+
+        <div id="dropdown-menu" class="dropdown-menu">
           <a onclick="filterCategory('layered')">Layered Chains</a>
           <a onclick="filterCategory('pendant')">Pendant Necklaces</a>
           <a onclick="filterCategory('earrings')">Earrings</a>
@@ -55,15 +63,12 @@
       </div>
 
       <a onclick="filterCategory('fashion')">Fashion</a>
+
     </nav>
 
-    <!-- CENTER LOGO -->
-    <div class="logo center-logo">
-      <img src="logo.png" alt="SVORQ Logo" class="logo-img">
-    </div>
-
-    <!-- RIGHT ICONS -->
+    <!-- RIGHT: ICONS -->
     <div class="header-right">
+
       <i class="fas fa-search"></i>
 
       <i class="fas fa-heart" onclick="showWishlist()">
@@ -73,6 +78,7 @@
       <i class="fas fa-shopping-bag" onclick="toggleCart()">
         <span id="cart-count">0</span>
       </i>
+
     </div>
 
   </div>
