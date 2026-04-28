@@ -1,14 +1,16 @@
-/* RESET /
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+/* 🔥 REMOVE BROKEN GLOBAL IMAGE BEHAVIOR */
 img {
   max-width: 100%;
-  height: auto;
-  display: block;
 }
+
+/* FIX SCALING */
 html, body {
   width: 100%;
   overflow-x: hidden;
@@ -20,7 +22,7 @@ body {
   color: #222;
 }
 
-/ CONTAINER /
+/* CONTAINER */
 .container {
   width: 100%;
   max-width: 1200px;
@@ -28,7 +30,7 @@ body {
   padding: 0 16px;
 }
 
-/ ================= HEADER ================= /
+/* ================= HEADER ================= */
 
 .header {
   background: #fff;
@@ -42,19 +44,22 @@ body {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  height: 75px;
+  height: 70px;
+  padding: 0 12px; /* 🔥 FIX SPACING */
 }
 
-/ LOGO /
+/* LOGO */
 .logo-img {
-  height: 55px;
+  height: 50px;
+  width: auto;
+  object-fit: contain;
 }
 
-/ NAV CENTER /
+/* NAV CENTER */
 .nav-center {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 22px;
 }
 
 .nav-center a {
@@ -69,7 +74,7 @@ body {
   color: #c3996b;
 }
 
-/ RIGHT ICONS /
+/* RIGHT ICONS */
 .header-right {
   display: flex;
   gap: 16px;
@@ -78,7 +83,7 @@ body {
   cursor: pointer;
 }
 
-/ ================= DROPDOWN ================= /
+/* ================= DROPDOWN ================= */
 
 .dropdown {
   position: relative;
@@ -87,14 +92,14 @@ body {
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 32px;
+  top: 35px;
   left: 0;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   padding: 10px;
   min-width: 180px;
-  z-index: 999;
+  z-index: 9999;
 }
 
 .dropdown-menu.show {
@@ -119,7 +124,7 @@ body {
   border-radius: 6px;
 }
 
-/ ================= HERO ================= /
+/* ================= HERO ================= */
 
 .hero {
   height: 60vh;
@@ -137,7 +142,7 @@ body {
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.6rem;
+  font-size: 2.4rem;
 }
 
 .hero p {
@@ -145,7 +150,7 @@ body {
   font-size: 14px;
 }
 
-/ ================= BUTTONS ================= /
+/* ================= BUTTONS ================= */
 
 .btn-primary {
   background: #c3996b;
@@ -159,7 +164,6 @@ body {
 
 .btn-primary:hover {
   background: #a88252;
-  transform: scale(1.03);
 }
 
 .btn-secondary {
@@ -170,7 +174,7 @@ body {
   background: transparent;
 }
 
-/ ================= CATEGORY ================= /
+/* ================= CATEGORY ================= */
 
 .categories {
   display: flex;
@@ -199,7 +203,7 @@ body {
   color: white;
 }
 
-/ ================= PRODUCTS ================= /
+/* ================= PRODUCTS ================= */
 
 .section-title {
   text-align: center;
@@ -214,7 +218,7 @@ body {
   gap: 16px;
 }
 
-/ CARD /
+/* CARD */
 .product-card {
   background: white;
   border-radius: 16px;
@@ -230,11 +234,11 @@ body {
 
 .product-card img {
   width: 100%;
-  height: 230px;
+  height: 220px;
   object-fit: cover;
 }
 
-/ BADGE /
+/* BADGE */
 .badge {
   position: absolute;
   top: 10px;
@@ -246,7 +250,7 @@ body {
   border-radius: 20px;
 }
 
-/ ❤️ WISHLIST (FIXED CLEAN) /
+/* ❤️ WISHLIST */
 .wishlist-icon {
   position: absolute;
   top: 10px;
@@ -258,7 +262,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #bbb; / default WHITE LOOK /
+  color: #ccc;
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
@@ -268,7 +272,7 @@ body {
   color: red;
 }
 
-/ INFO /
+/* INFO */
 .product-info {
   padding: 12px;
 }
@@ -278,7 +282,7 @@ body {
   margin-bottom: 5px;
 }
 
-/ PRICE /
+/* PRICE */
 .price {
   font-weight: 600;
 }
@@ -290,7 +294,7 @@ body {
   margin-left: 6px;
 }
 
-/ ================= CART ================= /
+/* ================= CART ================= */
 
 .cart-sidebar {
   position: fixed;
@@ -307,7 +311,7 @@ body {
   right: 0;
 }
 
-/ ================= MODAL ================= /
+/* ================= MODAL ================= */
 
 .modal {
   display: none;
@@ -329,7 +333,7 @@ body {
   border-radius: 12px;
 }
 
-/ ================= WHATSAPP ================= /
+/* ================= WHATSAPP ================= */
 
 .whatsapp-float {
   position: fixed;
@@ -346,7 +350,7 @@ body {
   font-size: 22px;
 }
 
-/ ================= LOADER ================= /
+/* ================= LOADER ================= */
 
 #loader {
   position: fixed;
@@ -359,27 +363,19 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-
-  transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .loader-logo {
   width: 120px;
-  max-width: 80%;
+  height: auto;
 }
 
-@keyframes pulse {
-  0% { opacity: 0.6; transform: scale(0.95); }
-  50% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0.6; transform: scale(0.95); }
-}
-
-/ ================= MOBILE ================= */
+/* ================= MOBILE ================= */
 
 @media (max-width: 768px) {
 
   .nav-center {
-    gap: 14px;
+    gap: 12px;
   }
 
   .logo-img {
@@ -388,9 +384,5 @@ body {
 
   .hero h1 {
     font-size: 2rem;
-  }
-
-  .product-grid {
-    grid-template-columns: 1fr 1fr;
   }
 }
