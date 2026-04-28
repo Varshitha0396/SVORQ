@@ -117,31 +117,35 @@ function renderProducts(filteredProducts = products) {
 
     const isWishlisted = wishlist.some(w => w.id === product.id);
 
-    grid.innerHTML += `
-      <div class="product-card">
+grid.innerHTML += `
+  <div class="product-card">
 
-        ${product.badge ? `<div class="badge">${product.badge}</div>` : ""}
+    ${product.badge ? `<div class="badge">${product.badge}</div>` : ""}
 
-        <div class="wishlist-icon ${isWishlisted ? 'active' : ''}"
-             onclick="toggleWishlist(${product.id})">♥</div>
+    <!-- ❤️ WISHLIST HEART -->
+    <div class="wishlist-icon ${isWishlisted ? 'active' : ''}"
+         onclick="event.stopPropagation(); toggleWishlist(${product.id})">
+      ♥
+    </div>
 
-        <!-- 🔥 CLICK OPENS PRODUCT PAGE -->
-        <img src="${product.images[0]}" onclick="openProduct(${product.id})">
+    <!-- 🔥 PRODUCT CLICK -->
+    <img src="${product.images[0]}" onclick="openProduct(${product.id})">
 
-        <div class="product-info">
-          <h3>${product.name}</h3>
+    <div class="product-info">
+      <h3>${product.name}</h3>
 
-          <p class="price">
-            ₹${product.price}
-            <span class="old-price">₹${product.originalPrice}</span>
-          </p>
+      <p class="price">
+        ₹${product.price}
+        <span class="old-price">₹${product.originalPrice}</span>
+      </p>
 
-          <button class="btn-primary" onclick="addToCart(${product.id})">
-            Add to Cart
-          </button>
-        </div>
-      </div>
-    `;
+      <button class="btn-primary"
+        onclick="event.stopPropagation(); addToCart(${product.id})">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+`;
   });
 }
 
