@@ -8,8 +8,8 @@
 
   <title>SVORQ - Timeless Luxury</title>
 
-  <!-- 🔥 FORCE CSS RELOAD (VERY IMPORTANT) -->
-  <link rel="stylesheet" href="style.css?v=3">
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css?v=4">
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
@@ -25,6 +25,9 @@
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Razorpay -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 
 <body>
@@ -38,12 +41,12 @@
 <header class="header">
   <div class="container header-clean">
 
-    <!-- LEFT: LOGO -->
+    <!-- LOGO -->
     <div class="logo">
       <img src="logo.png" class="logo-img" alt="SVORQ Logo">
     </div>
 
-    <!-- CENTER: NAV -->
+    <!-- NAV -->
     <nav class="nav-center">
 
       <a onclick="filterCategory('all')">Shop</a>
@@ -67,16 +70,18 @@
 
     </nav>
 
-    <!-- RIGHT: ICONS -->
+    <!-- RIGHT ICONS -->
     <div class="header-right">
 
       <i class="fas fa-search"></i>
 
-      <i class="fas fa-heart" onclick="showWishlist()">
+      <!-- ❤️ GO TO WISHLIST PAGE -->
+      <i class="fas fa-heart" onclick="window.location.href='wishlist.html'">
         <span id="wishlist-count">0</span>
       </i>
 
-      <i class="fas fa-shopping-bag" onclick="toggleCart()">
+      <!-- 🛒 GO TO CART PAGE -->
+      <i class="fas fa-shopping-bag" onclick="window.location.href='cart.html'">
         <span id="cart-count">0</span>
       </i>
 
@@ -102,7 +107,7 @@
   </div>
 </section>
 
-<!-- CATEGORY BAR -->
+<!-- CATEGORY -->
 <section class="categories">
   <button onclick="filterCategory('all')">All</button>
   <button onclick="filterCategory('layered')">Layered</button>
@@ -121,36 +126,30 @@
   </div>
 </section>
 
-<!-- CART -->
-<div id="cart-sidebar" class="cart-sidebar">
-  <div class="cart-header">
-    <h3>Your Cart (<span id="sidebar-cart-count">0</span>)</h3>
-    <i class="fas fa-times" onclick="toggleCart()"></i>
-  </div>
-
-  <div id="cart-items"></div>
-
-  <div class="cart-footer">
-    <strong>Total: ₹<span id="cart-total">0</span></strong>
-    <button class="btn-primary" onclick="checkout()">Checkout</button>
-  </div>
-</div>
-
-<!-- MODAL -->
-<div id="quick-view-modal" class="modal">
-  <div class="modal-content">
-    <span onclick="closeModal()" class="close">×</span>
-    <div id="modal-body"></div>
-  </div>
-</div>
-
 <!-- WHATSAPP -->
 <a href="https://wa.me/918309304255" class="whatsapp-float">
   <i class="fab fa-whatsapp"></i>
 </a>
 
 <!-- SCRIPT -->
-<script src="script.js?v=3"></script>
+<script src="script.js?v=4"></script>
+
+<!-- 🔥 DROPDOWN FIX SCRIPT -->
+<script>
+function toggleDropdown() {
+  document.getElementById("dropdown-menu").classList.toggle("show");
+}
+
+// Close dropdown when clicking outside
+document.addEventListener("click", function(e) {
+  const dropdown = document.querySelector(".dropdown");
+  const menu = document.getElementById("dropdown-menu");
+
+  if (!dropdown.contains(e.target)) {
+    menu.classList.remove("show");
+  }
+});
+</script>
 
 </body>
 </html>
