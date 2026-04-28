@@ -346,6 +346,8 @@ body {
 
 #loader {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: #faf9f6;
@@ -353,11 +355,13 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+
+  transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .loader-logo {
   width: 120px;
-  animation: pulse 1.5s infinite;
+  max-width: 80%;
 }
 
 @keyframes pulse {
