@@ -1,4 +1,4 @@
-// 🔥 PRODUCTS (MULTIPLE IMAGES + CATEGORIES)
+// 🔥 PRODUCTS
 let products = [
 
   {
@@ -39,6 +39,18 @@ let cart = JSON.parse(localStorage.getItem('svorq_cart')) || [];
 let wishlist = JSON.parse(localStorage.getItem('svorq_wishlist')) || [];
 
 
+// SAVE
+function saveCart() {
+  localStorage.setItem('svorq_cart', JSON.stringify(cart));
+  updateCartCount();
+}
+
+function saveWishlist() {
+  localStorage.setItem('svorq_wishlist', JSON.stringify(wishlist));
+  updateWishlistCount();
+}
+
+
 // COUNTS
 function updateCartCount() {
   const count = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -48,13 +60,6 @@ function updateCartCount() {
 
 function updateWishlistCount() {
   document.getElementById('wishlist-count').textContent = wishlist.length;
-}
-
-
-// SAVE
-function saveCart() {
-  localStorage.setItem('svorq_cart', JSON.stringify(cart));
-  updateCartCount();
 }
 
 
@@ -74,17 +79,45 @@ function showToast(msg) {
 }
 
 
-// 🔥 PRODUCT DISPLAY (WITH SLIDER)
+// ❤️ WISHLIST TOGGLE
+function toggleWishlist(id) {
+  const exists = wishlist.find(item => item.id === id);
+
+  if (exists) {
+    wishlist = wishlist.filter(item => item.id !== id);
+    showToast("Removed from wishlist");
+  } else {
+    const product = products.find(p => p.id === id);
+    wishlist.push(product);
+    showToast("Added to wishlist ❤️");
+  }
+
+  saveWishlist();
+  renderProducts(); // refresh UI
+}
+
+
+// 🔥 PRODUCT DISPLAY
 function renderProducts(filteredProducts = products) {
   const grid = document.getElementById('product-grid');
   grid.innerHTML = '';
 
   filteredProducts.forEach(product => {
 
+    const isWishlisted = wishlist.some(w => w.id === product.id);
+
     grid.innerHTML += `
       <div class="product-card">
 
         ${product.badge ? `<div class="badge">${product.badge}</div>` : ""}
+
+        <!-- ❤️ HEART -->
+        <div onclick="toggleWishlist(${product.id})"
+             style="position:absolute;top:10px;right:10px;
+             font-size:18px;cursor:pointer;
+             color:${isWishlisted ? 'red' : '#ccc'};">
+          ♥
+        </div>
 
         <img src="${product.images[0]}" onclick="quickView(${product.id})">
 
@@ -110,19 +143,16 @@ function renderProducts(filteredProducts = products) {
 }
 
 
-// 🔥 QUICK VIEW (IMAGE SLIDER)
+// 🔥 QUICK VIEW (WITH WISHLIST)
 function quickView(id) {
   const product = products.find(p => p.id === id);
-
-  let index = 0;
+  const isWishlisted = wishlist.some(w => w.id === id);
 
   document.getElementById('modal-body').innerHTML = `
     <div class="slider">
 
       <button class="slider-btn left" onclick="prevSlide()">‹</button>
-
       <img id="slider-img" src="${product.images[0]}">
-
       <button class="slider-btn right" onclick="nextSlide()">›</button>
 
     </div>
@@ -136,16 +166,25 @@ function quickView(id) {
     <h2>${product.name}</h2>
 
     <p class="price">
-      ₹${product.price} <span class="old-price">₹${product.originalPrice}</span>
+      ₹${product.price}
+      <span class="old-price">₹${product.originalPrice}</span>
     </p>
 
     <p class="premium-line">
       ✔ Waterproof • ✔ Anti Tarnish • ✔ Premium Steel
     </p>
 
-    <button class="btn-primary" onclick="addToCart(${product.id})">
-      Add to Cart
-    </button>
+    <div style="display:flex;gap:10px;margin-top:15px;">
+      <button class="btn-primary" onclick="addToCart(${product.id})">
+        Add to Cart
+      </button>
+
+      <button onclick="toggleWishlist(${product.id})"
+        style="border:none;font-size:20px;cursor:pointer;
+        color:${isWishlisted ? 'red' : '#ccc'};">
+        ♥
+      </button>
+    </div>
   `;
 
   window.currentProduct = product;
@@ -155,7 +194,7 @@ function quickView(id) {
 }
 
 
-// SLIDER FUNCTIONS
+// SLIDER
 function nextSlide() {
   let p = window.currentProduct;
   window.currentIndex = (window.currentIndex + 1) % p.images.length;
@@ -183,7 +222,7 @@ function addToCart(id) {
   else cart.push({ ...p, quantity: 1 });
 
   saveCart();
-  showToast("Added to cart");
+  showToast("Added to cart 🛒");
 }
 
 
@@ -205,6 +244,12 @@ function searchProducts() {
 function closeModal() {
   document.getElementById('quick-view-modal').style.display = 'none';
 }
+
+
+// LOADER FIX
+window.addEventListener("load", () => {
+  document.getElementById("loader").style.display = "none";
+});
 
 
 // INIT
