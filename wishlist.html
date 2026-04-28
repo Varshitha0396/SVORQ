@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wishlist | SVORQ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container header-clean">
+    <img src="logo.png" class="logo-img">
+    <h3>Wishlist ❤️</h3>
+    <div></div>
+  </div>
+</header>
+
+<section class="products-section">
+  <div class="container">
+    <div id="wishlist-container" class="product-grid"></div>
+  </div>
+</section>
+
+<script>
+let wishlist = JSON.parse(localStorage.getItem('svorq_wishlist')) || [];
+
+function renderWishlist() {
+  const container = document.getElementById("wishlist-container");
+  container.innerHTML = "";
+
+  if (wishlist.length === 0) {
+    container.innerHTML = "<p style='text-align:center;'>No items in wishlist ❤️</p>";
+    return;
+  }
+
+  wishlist.forEach(p => {
+    container.innerHTML += `
+      <div class="product-card">
+        <img src="${p.images[0]}">
+        <div class="product-info">
+          <h3>${p.name}</h3>
+          <p class="price">₹${p.price}</p>
+
+          <button class="btn-primary" onclick="addToCart(${p.id})">
+            Add to Cart
+          </button>
+
+          <button onclick="removeFromWishlist(${p.id})" style="margin-top:8px;">
+            Remove
+          </button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function removeFromWishlist(id) {
+  wishlist = wishlist.filter(item => item.id !== id);
+  localStorage.setItem('svorq_wishlist', JSON.stringify(wishlist));
+  renderWishlist();
+}
+
+function addToCart(id) {
+  let cart = JSON.parse(localStorage.getItem('svorq_cart')) || [];
+  const item = wishlist.find(x => x.id === id);
+
+  const existing = cart.find(x => x.id === id);
+
+  if (existing) existing.quantity++;
+  else cart.push({ ...item, quantity: 1 });
+
+  localStorage.setItem('svorq_cart', JSON.stringify(cart));
+  alert("Added to cart 🛒");
+}
+
+renderWishlist();
+</script>
+
+</body>
+</html>
