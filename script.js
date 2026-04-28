@@ -8,7 +8,8 @@ let products = [
     originalPrice: 2499,
     badge: "Bestseller",
     category: "layered",
-    images: ["necklace1.jpg", "necklace2.jpg", "necklace3.jpg", "necklace4.jpg"]
+    images: ["necklace1.jpg", "necklace2.jpg", "necklace3.jpg", "necklace4.jpg"],
+    description: "Elegant layered necklace with premium anti-tarnish finish."
   },
 
   {
@@ -18,7 +19,8 @@ let products = [
     originalPrice: 2799,
     badge: "Trending",
     category: "statement",
-    images: ["ocean1.jpg", "ocean2.jpg", "ocean3.jpg", "ocean4.jpg"]
+    images: ["ocean1.jpg", "ocean2.jpg", "ocean3.jpg", "ocean4.jpg"],
+    description: "Ocean-inspired statement necklace with premium shine."
   },
 
   {
@@ -28,7 +30,8 @@ let products = [
     originalPrice: 1999,
     badge: "Hot",
     category: "earrings",
-    images: ["star1.jpg"]
+    images: ["star1.jpg"],
+    description: "Minimal celestial hoops with long-lasting polish."
   }
 
 ];
@@ -79,7 +82,7 @@ function showToast(msg) {
 }
 
 
-// ❤️ WISHLIST TOGGLE
+// ❤️ WISHLIST
 function toggleWishlist(id) {
   const exists = wishlist.find(item => item.id === id);
 
@@ -93,7 +96,15 @@ function toggleWishlist(id) {
   }
 
   saveWishlist();
-  renderProducts(); // refresh UI
+  renderProducts();
+}
+
+
+// 🔥 PRODUCT CLICK → OPEN NEW PAGE
+function openProduct(id) {
+  const product = products.find(p => p.id === id);
+  localStorage.setItem("selected_product", JSON.stringify(product));
+  window.location.href = "product.html";
 }
 
 
@@ -111,15 +122,11 @@ function renderProducts(filteredProducts = products) {
 
         ${product.badge ? `<div class="badge">${product.badge}</div>` : ""}
 
-        <!-- ❤️ HEART -->
-        <div onclick="toggleWishlist(${product.id})"
-             style="position:absolute;top:10px;right:10px;
-             font-size:18px;cursor:pointer;
-             color:${isWishlisted ? 'red' : '#ccc'};">
-          ♥
-        </div>
+        <div class="wishlist-icon ${isWishlisted ? 'active' : ''}"
+             onclick="toggleWishlist(${product.id})">♥</div>
 
-        <img src="${product.images[0]}" onclick="quickView(${product.id})">
+        <!-- 🔥 CLICK OPENS PRODUCT PAGE -->
+        <img src="${product.images[0]}" onclick="openProduct(${product.id})">
 
         <div class="product-info">
           <h3>${product.name}</h3>
@@ -129,10 +136,6 @@ function renderProducts(filteredProducts = products) {
             <span class="old-price">₹${product.originalPrice}</span>
           </p>
 
-          <p class="premium-line">
-            Waterproof • Anti Tarnish • Premium Finish ✨
-          </p>
-
           <button class="btn-primary" onclick="addToCart(${product.id})">
             Add to Cart
           </button>
@@ -140,76 +143,6 @@ function renderProducts(filteredProducts = products) {
       </div>
     `;
   });
-}
-
-
-// 🔥 QUICK VIEW (WITH WISHLIST)
-function quickView(id) {
-  const product = products.find(p => p.id === id);
-  const isWishlisted = wishlist.some(w => w.id === id);
-
-  document.getElementById('modal-body').innerHTML = `
-    <div class="slider">
-
-      <button class="slider-btn left" onclick="prevSlide()">‹</button>
-      <img id="slider-img" src="${product.images[0]}">
-      <button class="slider-btn right" onclick="nextSlide()">›</button>
-
-    </div>
-
-    <div class="thumbnails">
-      ${product.images.map((img, i) => `
-        <img src="${img}" onclick="goSlide(${i})">
-      `).join('')}
-    </div>
-
-    <h2>${product.name}</h2>
-
-    <p class="price">
-      ₹${product.price}
-      <span class="old-price">₹${product.originalPrice}</span>
-    </p>
-
-    <p class="premium-line">
-      ✔ Waterproof • ✔ Anti Tarnish • ✔ Premium Steel
-    </p>
-
-    <div style="display:flex;gap:10px;margin-top:15px;">
-      <button class="btn-primary" onclick="addToCart(${product.id})">
-        Add to Cart
-      </button>
-
-      <button onclick="toggleWishlist(${product.id})"
-        style="border:none;font-size:20px;cursor:pointer;
-        color:${isWishlisted ? 'red' : '#ccc'};">
-        ♥
-      </button>
-    </div>
-  `;
-
-  window.currentProduct = product;
-  window.currentIndex = 0;
-
-  document.getElementById('quick-view-modal').style.display = 'flex';
-}
-
-
-// SLIDER
-function nextSlide() {
-  let p = window.currentProduct;
-  window.currentIndex = (window.currentIndex + 1) % p.images.length;
-  document.getElementById("slider-img").src = p.images[window.currentIndex];
-}
-
-function prevSlide() {
-  let p = window.currentProduct;
-  window.currentIndex = (window.currentIndex - 1 + p.images.length) % p.images.length;
-  document.getElementById("slider-img").src = p.images[window.currentIndex];
-}
-
-function goSlide(i) {
-  window.currentIndex = i;
-  document.getElementById("slider-img").src = window.currentProduct.images[i];
 }
 
 
@@ -240,20 +173,19 @@ function searchProducts() {
 }
 
 
-// MODAL CLOSE
-function closeModal() {
-  document.getElementById('quick-view-modal').style.display = 'none';
+// DROPDOWN
+function toggleDropdown() {
+  document.getElementById("dropdown-menu").classList.toggle("show");
 }
 
 
-// 🔥 FIX LOADER (IMPORTANT)
+// LOADER
 window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
-
   setTimeout(() => {
     loader.style.opacity = "0";
     loader.style.visibility = "hidden";
-  }, 800); // smooth delay
+  }, 600);
 });
 
 
