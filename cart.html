@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart | SVORQ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container header-clean">
+    <img src="logo.png" class="logo-img">
+    <h3>Your Cart 🛒</h3>
+    <div></div>
+  </div>
+</header>
+
+<section class="products-section">
+  <div class="container">
+
+    <div id="cart-container"></div>
+
+    <h3 style="margin-top:20px;">
+      Total: ₹<span id="cart-total">0</span>
+    </h3>
+
+    <button class="btn-primary" onclick="checkout()">
+      Checkout
+    </button>
+
+  </div>
+</section>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('svorq_cart')) || [];
+
+function renderCart() {
+  const container = document.getElementById("cart-container");
+  const totalEl = document.getElementById("cart-total");
+
+  container.innerHTML = "";
+  let total = 0;
+
+  if (cart.length === 0) {
+    container.innerHTML = "<p>Your cart is empty 🛒</p>";
+    totalEl.textContent = "0";
+    return;
+  }
+
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+
+    container.innerHTML += `
+      <div class="cart-item">
+        <img src="${item.images[0]}" class="cart-img">
+
+        <div class="cart-info">
+          <p>${item.name}</p>
+          <p>₹${item.price}</p>
+
+          <div class="cart-qty">
+            <button onclick="decreaseQty(${item.id})">−</button>
+            <span>${item.quantity}</span>
+            <button onclick="increaseQty(${item.id})">+</button>
+          </div>
+        </div>
+
+        <div onclick="removeItem(${item.id})">❌</div>
+      </div>
+    `;
+  });
+
+  totalEl.textContent = total;
+}
+
+function increaseQty(id) {
+  const item = cart.find(x => x.id === id);
+  item.quantity++;
+  save();
+}
+
+function decreaseQty(id) {
+  const item = cart.find(x => x.id === id);
+
+  if (item.quantity > 1) item.quantity--;
+  else cart = cart.filter(x => x.id !== id);
+
+  save();
+}
+
+function removeItem(id) {
+  cart = cart.filter(x => x.id !== id);
+  save();
+}
+
+function save() {
+  localStorage.setItem('svorq_cart', JSON.stringify(cart));
+  renderCart();
+}
+
+function checkout() {
+  let total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const options = {
+    key: "rzp_test_YOUR_KEY",
+    amount: total * 100,
+    currency: "INR",
+    name: "SVORQ",
+    description: "Order Payment",
+    handler: function () {
+      alert("Payment Successful 🎉");
+      cart = [];
+      save();
+    }
+  };
+
+  const rzp = new Razorpay(options);
+  rzp.open();
+}
+
+renderCart();
+</script>
+
+</body>
+</html>
