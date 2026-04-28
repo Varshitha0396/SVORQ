@@ -32,11 +32,9 @@ let products = [
   }
 ];
 
-
 // STORAGE
 let cart = JSON.parse(localStorage.getItem('svorq_cart')) || [];
 let wishlist = JSON.parse(localStorage.getItem('svorq_wishlist')) || [];
-
 
 // SAVE
 function saveCart() {
@@ -49,8 +47,7 @@ function saveWishlist() {
   updateWishlistCount();
 }
 
-
-// COUNTS (SAFE)
+// COUNTS
 function updateCartCount() {
   const count = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -66,16 +63,24 @@ function updateWishlistCount() {
   if (wishEl) wishEl.textContent = wishlist.length;
 }
 
-
-// TOAST
+// ✅ TOAST FIXED
 function showToast(msg) {
   let t = document.createElement("div");
   t.innerText = msg;
-  t.style.cssText =     position:fixed;     bottom:20px;     left:50%;     transform:translateX(-50%);     background:#000;     color:#fff;     padding:10px 20px;     border-radius:30px;     z-index:9999;  ;
+  t.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    z-index: 9999;
+  `;
   document.body.appendChild(t);
   setTimeout(() => t.remove(), 2000);
 }
-
 
 // ❤️ WISHLIST
 function toggleWishlist(id) {
@@ -94,8 +99,7 @@ function toggleWishlist(id) {
   renderProducts();
 }
 
-
-// 🔥 PRODUCT CLICK (SAFE)
+// 🔥 OPEN PRODUCT
 function openProduct(id) {
   const product = products.find(p => p.id === id);
 
@@ -105,13 +109,10 @@ function openProduct(id) {
   }
 
   localStorage.setItem("selected_product", JSON.stringify(product));
-
-  // GitHub safe path
   window.location.href = "./product.html";
 }
 
-
-// 🔥 PRODUCT DISPLAY
+// ✅ PRODUCT DISPLAY FIXED
 function renderProducts(filteredProducts = products) {
   const grid = document.getElementById('product-grid');
   if (!grid) return;
@@ -119,13 +120,40 @@ function renderProducts(filteredProducts = products) {
   grid.innerHTML = '';
 
   filteredProducts.forEach(product => {
-
     const isWishlisted = wishlist.some(w => w.id === product.id);
 
-    grid.innerHTML +=       <div class="product-card">          ${product.badge ?<div class="badge">${product.badge}</div>: ""}          <!-- ❤️ WISHLIST -->         <div class="wishlist-icon ${isWishlisted ? 'active' : ''}"              onclick="event.stopPropagation(); toggleWishlist(${product.id})">           &#10084;         </div>          <!-- 🔥 PRODUCT CLICK -->         <img src="${product.images[0]}" onclick="openProduct(${product.id})">          <div class="product-info">           <h3>${product.name}</h3>            <p class="price">             ₹${product.price}             <span class="old-price">₹${product.originalPrice}</span>           </p>            <button class="btn-primary"             onclick="event.stopPropagation(); addToCart(${product.id})">             Add to Cart           </button>         </div>       </div>    ;
+    grid.innerHTML += `
+      <div class="product-card">
+
+        ${product.badge ? `<div class="badge">${product.badge}</div>` : ""}
+
+        <!-- ❤️ WISHLIST -->
+        <div class="wishlist-icon ${isWishlisted ? 'active' : ''}"
+             onclick="event.stopPropagation(); toggleWishlist(${product.id})">
+          ♥
+        </div>
+
+        <!-- PRODUCT CLICK -->
+        <img src="${product.images[0]}" onclick="openProduct(${product.id})">
+
+        <div class="product-info">
+          <h3>${product.name}</h3>
+
+          <p class="price">
+            ₹${product.price}
+            <span class="old-price">₹${product.originalPrice}</span>
+          </p>
+
+          <button class="btn-primary"
+            onclick="event.stopPropagation(); addToCart(${product.id})">
+            Add to Cart
+          </button>
+        </div>
+
+      </div>
+    `;
   });
 }
-
 
 // CART
 function addToCart(id) {
@@ -139,13 +167,11 @@ function addToCart(id) {
   showToast("Added to cart 🛒");
 }
 
-
 // FILTER
 function filterCategory(cat) {
   if (cat === 'all') return renderProducts(products);
   renderProducts(products.filter(p => p.category === cat));
 }
-
 
 // SEARCH
 function searchProducts() {
@@ -158,13 +184,11 @@ function searchProducts() {
   ));
 }
 
-
 // DROPDOWN
 function toggleDropdown() {
   const menu = document.getElementById("dropdown-menu");
   if (menu) menu.classList.toggle("show");
 }
-
 
 // LOADER
 window.addEventListener("load", () => {
@@ -177,10 +201,9 @@ window.addEventListener("load", () => {
   }
 });
 
-
 // INIT
 document.addEventListener('DOMContentLoaded', () => {
   renderProducts();
   updateCartCount();
   updateWishlistCount();
-}
+});
