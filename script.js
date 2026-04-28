@@ -246,9 +246,14 @@ function closeModal() {
 }
 
 
-// LOADER FIX
+// 🔥 FIX LOADER (IMPORTANT)
 window.addEventListener("load", () => {
-  document.getElementById("loader").style.display = "none";
+  const loader = document.getElementById("loader");
+
+  setTimeout(() => {
+    loader.style.opacity = "0";
+    loader.style.visibility = "hidden";
+  }, 800); // smooth delay
 });
 
 
