@@ -1,4 +1,4 @@
-// 🔥 PRODUCTS
+// PRODUCTS
 let products = [
   {
     id: 1,
@@ -7,7 +7,7 @@ let products = [
     originalPrice: 2499,
     badge: "Bestseller",
     category: "layered",
-    images: ["necklace1.jpg", "necklace2.jpg", "necklace3.jpg", "necklace4.jpg"],
+    images: ["necklace1.jpg"],
     description: "Elegant layered necklace with premium anti-tarnish finish."
   },
   {
@@ -17,8 +17,8 @@ let products = [
     originalPrice: 2799,
     badge: "Trending",
     category: "statement",
-    images: ["ocean1.jpg", "ocean2.jpg", "ocean3.jpg", "ocean4.jpg"],
-    description: "Ocean-inspired statement necklace with premium shine."
+    images: ["ocean1.jpg"],
+    description: "Ocean-inspired statement necklace."
   },
   {
     id: 3,
@@ -28,13 +28,15 @@ let products = [
     badge: "Hot",
     category: "earrings",
     images: ["star1.jpg"],
-    description: "Minimal celestial hoops with long-lasting polish."
+    description: "Minimal celestial hoops."
   }
 ];
+
 
 // STORAGE
 let cart = JSON.parse(localStorage.getItem('svorq_cart')) || [];
 let wishlist = JSON.parse(localStorage.getItem('svorq_wishlist')) || [];
+
 
 // SAVE
 function saveCart() {
@@ -47,42 +49,41 @@ function saveWishlist() {
   updateWishlistCount();
 }
 
+
 // COUNTS
 function updateCartCount() {
   const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  const cartEl = document.getElementById('cart-count');
-  const sidebarEl = document.getElementById('sidebar-cart-count');
-
-  if (cartEl) cartEl.textContent = count;
-  if (sidebarEl) sidebarEl.textContent = count;
+  const el = document.getElementById('cart-count');
+  if (el) el.textContent = count;
 }
 
 function updateWishlistCount() {
-  const wishEl = document.getElementById('wishlist-count');
-  if (wishEl) wishEl.textContent = wishlist.length;
+  const el = document.getElementById('wishlist-count');
+  if (el) el.textContent = wishlist.length;
 }
 
-// ✅ TOAST FIXED
+
+// TOAST
 function showToast(msg) {
-  let t = document.createElement("div");
+  const t = document.createElement("div");
   t.innerText = msg;
-  t.style.cssText = `
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #000;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 30px;
-    z-index: 9999;
-  `;
+
+  t.style.position = "fixed";
+  t.style.bottom = "20px";
+  t.style.left = "50%";
+  t.style.transform = "translateX(-50%)";
+  t.style.background = "#000";
+  t.style.color = "#fff";
+  t.style.padding = "10px 20px";
+  t.style.borderRadius = "30px";
+  t.style.zIndex = "9999";
+
   document.body.appendChild(t);
   setTimeout(() => t.remove(), 2000);
 }
 
-// ❤️ WISHLIST
+
+// WISHLIST
 function toggleWishlist(id) {
   const exists = wishlist.find(item => item.id === id);
 
@@ -99,27 +100,23 @@ function toggleWishlist(id) {
   renderProducts();
 }
 
-// 🔥 OPEN PRODUCT
+
+// PRODUCT PAGE
 function openProduct(id) {
   const product = products.find(p => p.id === id);
-
-  if (!product) {
-    alert("Product not found ❌");
-    return;
-  }
-
   localStorage.setItem("selected_product", JSON.stringify(product));
   window.location.href = "./product.html";
 }
 
-// ✅ PRODUCT DISPLAY FIXED
-function renderProducts(filteredProducts = products) {
+
+// RENDER PRODUCTS
+function renderProducts(list = products) {
   const grid = document.getElementById('product-grid');
   if (!grid) return;
 
-  grid.innerHTML = '';
+  grid.innerHTML = "";
 
-  filteredProducts.forEach(product => {
+  list.forEach(product => {
     const isWishlisted = wishlist.some(w => w.id === product.id);
 
     grid.innerHTML += `
@@ -127,13 +124,11 @@ function renderProducts(filteredProducts = products) {
 
         ${product.badge ? `<div class="badge">${product.badge}</div>` : ""}
 
-        <!-- ❤️ WISHLIST -->
         <div class="wishlist-icon ${isWishlisted ? 'active' : ''}"
-             onclick="event.stopPropagation(); toggleWishlist(${product.id})">
+          onclick="event.stopPropagation(); toggleWishlist(${product.id})">
           ♥
         </div>
 
-        <!-- PRODUCT CLICK -->
         <img src="${product.images[0]}" onclick="openProduct(${product.id})">
 
         <div class="product-info">
@@ -155,6 +150,7 @@ function renderProducts(filteredProducts = products) {
   });
 }
 
+
 // CART
 function addToCart(id) {
   const p = products.find(x => x.id === id);
@@ -167,22 +163,13 @@ function addToCart(id) {
   showToast("Added to cart 🛒");
 }
 
+
 // FILTER
 function filterCategory(cat) {
-  if (cat === 'all') return renderProducts(products);
-  renderProducts(products.filter(p => p.category === cat));
+  if (cat === 'all') renderProducts(products);
+  else renderProducts(products.filter(p => p.category === cat));
 }
 
-// SEARCH
-function searchProducts() {
-  const input = document.getElementById('search-input');
-  if (!input) return;
-
-  const term = input.value.toLowerCase();
-  renderProducts(products.filter(p =>
-    p.name.toLowerCase().includes(term)
-  ));
-}
 
 // DROPDOWN
 function toggleDropdown() {
@@ -190,16 +177,15 @@ function toggleDropdown() {
   if (menu) menu.classList.toggle("show");
 }
 
-// LOADER
+
+// LOADER FIX
 window.addEventListener("load", () => {
   const loader = document.getElementById("loader");
-
   if (loader) {
-    loader.style.opacity = "0";
-    loader.style.visibility = "hidden";
-    loader.style.pointerEvents = "none";
+    loader.style.display = "none";
   }
 });
+
 
 // INIT
 document.addEventListener('DOMContentLoaded', () => {
