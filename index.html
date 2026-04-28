@@ -25,29 +25,21 @@
 
 <body>
 
-<!-- LOADER -->
+<!-- LOADER (FIXED: LOGO ONLY) -->
 <div id="loader">
-  <h1>SVORQ</h1>
+  <img src="logo.png" alt="SVORQ Logo" class="loader-logo">
 </div>
 
 <!-- HEADER -->
 <header class="header">
   <div class="container header-row">
 
-    <!-- LOGO (UNCHANGED) -->
-    <div class="logo">
-      <img src="logo.png" alt="SVORQ Logo" class="logo-img">
-    </div>
-
-    <!-- NAV (FIXED STRUCTURE) -->
-    <nav class="nav">
-
+    <!-- LEFT NAV -->
+    <nav class="nav-left">
       <a onclick="filterCategory('all')">Shop</a>
 
-      <!-- JEWELLERY DROPDOWN -->
       <div class="dropdown">
         <a class="dropdown-toggle">Jewellery</a>
-
         <div class="dropdown-menu">
           <a onclick="filterCategory('layered')">Layered Chains</a>
           <a onclick="filterCategory('pendant')">Pendant Necklaces</a>
@@ -60,12 +52,15 @@
       </div>
 
       <a onclick="filterCategory('fashion')">Fashion</a>
-
     </nav>
 
-    <!-- RIGHT -->
-    <div class="header-right">
+    <!-- CENTER LOGO (IMPORTANT FIX) -->
+    <div class="logo center-logo">
+      <img src="logo.png" alt="SVORQ Logo" class="logo-img">
+    </div>
 
+    <!-- RIGHT ICONS -->
+    <div class="header-right">
       <i class="fas fa-search"></i>
 
       <i class="fas fa-heart" onclick="showWishlist()">
@@ -75,7 +70,6 @@
       <i class="fas fa-shopping-bag" onclick="toggleCart()">
         <span id="cart-count">0</span>
       </i>
-
     </div>
 
   </div>
@@ -99,7 +93,7 @@
   </div>
 </section>
 
-<!-- CATEGORY BAR (SUBCATEGORY STYLE) -->
+<!-- CATEGORY BAR -->
 <section class="categories">
   <button onclick="filterCategory('all')">All</button>
   <button onclick="filterCategory('layered')">Layered</button>
