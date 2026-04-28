@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 🔥 CRITICAL FIX (prevents zoom-out bug) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
   <title>SVORQ - Timeless Luxury</title>
 
   <link rel="stylesheet" href="style.css">
@@ -25,7 +28,7 @@
 
 <body>
 
-<!-- LOADER (FIXED: LOGO ONLY) -->
+<!-- 🔥 LOADER FIX (prevents layout shrink bug) -->
 <div id="loader">
   <img src="logo.png" alt="SVORQ Logo" class="loader-logo">
 </div>
@@ -54,7 +57,7 @@
       <a onclick="filterCategory('fashion')">Fashion</a>
     </nav>
 
-    <!-- CENTER LOGO (IMPORTANT FIX) -->
+    <!-- CENTER LOGO -->
     <div class="logo center-logo">
       <img src="logo.png" alt="SVORQ Logo" class="logo-img">
     </div>
@@ -86,7 +89,6 @@
       Shop Now
     </button>
 
-    <!-- INSTALL BUTTON -->
     <button id="install-btn" class="btn-secondary" onclick="installApp()" style="display:none;">
       Install App 📱
     </button>
@@ -130,7 +132,7 @@
 <!-- MODAL -->
 <div id="quick-view-modal" class="modal">
   <div class="modal-content">
-    <span onclick="closeModal()" class="close">&times;</span>
+    <span onclick="closeModal()" class="close">×</span>
     <div id="modal-body"></div>
   </div>
 </div>
