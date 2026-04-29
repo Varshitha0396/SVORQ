@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
 
-  <!-- MOBILE FIX -->
+  <!-- MOBILE -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>SVORQ - Timeless Luxury</title>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css?v=4">
+  <!-- ✅ FORCE REFRESH -->
+  <link rel="stylesheet" href="style.css?v=10">
 
   <!-- PWA -->
   <link rel="manifest" href="manifest.json">
@@ -75,12 +75,12 @@
 
       <i class="fas fa-search"></i>
 
-      <!-- ❤️ GO TO WISHLIST PAGE -->
+      <!-- ❤️ WISHLIST -->
       <i class="fas fa-heart" onclick="window.location.href='wishlist.html'">
         <span id="wishlist-count">0</span>
       </i>
 
-      <!-- 🛒 GO TO CART PAGE -->
+      <!-- 🛒 CART -->
       <i class="fas fa-shopping-bag" onclick="window.location.href='cart.html'">
         <span id="cart-count">0</span>
       </i>
@@ -131,25 +131,8 @@
   <i class="fab fa-whatsapp"></i>
 </a>
 
-<!-- SCRIPT -->
-<script src="script.js?v=4"></script>
-
-<!-- 🔥 DROPDOWN FIX SCRIPT -->
-<script>
-function toggleDropdown() {
-  document.getElementById("dropdown-menu").classList.toggle("show");
-}
-
-// Close dropdown when clicking outside
-document.addEventListener("click", function(e) {
-  const dropdown = document.querySelector(".dropdown");
-  const menu = document.getElementById("dropdown-menu");
-
-  if (!dropdown.contains(e.target)) {
-    menu.classList.remove("show");
-  }
-});
-</script>
+<!-- ✅ SCRIPT (UPDATED VERSION) -->
+<script src="script.js?v=10"></script>
 
 </body>
 </html>
