@@ -29,7 +29,17 @@ let products = [
     category: "earrings",
     images: ["star1.jpg"],
     description: "Minimal celestial hoops."
-  }
+  },
+  {
+  id: 4,
+  name: "Diamond Tassel Glam Earrings",
+  price: 1399,
+  originalPrice: 2599,
+  badge: "Luxury",
+  category: "earrings",
+  images: ["glow1.jpg","glow2.jpg","glow3.jpg","glow4.jpg"],
+  description: "Premium diamond tassel earrings designed for a glamorous statement."
+}
 ];
 
 
