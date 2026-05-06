@@ -1,1 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SVORQ Login</title>
+
+  <link rel="stylesheet" href="style.css?v=5">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body class="login-body">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-clean">
+
+      <div class="logo">
+        <img src="logo.png" class="logo-img">
+      </div>
+
+      <div class="header-right">
+
+        <i class="fas fa-home"
+          onclick="window.location.href='index.html'"></i>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- LOGIN SECTION -->
+  <section class="login-section">
+
+    <div class="login-card">
+
+      <h1>Welcome to SVORQ ✨</h1>
+
+      <p>Luxury Jewellery Crafted for You</p>
+
+      <!-- LOGIN -->
+      <div class="form-box">
+
+        <h2>Login</h2>
+
+        <input
+          type="email"
+          id="login-email"
+          placeholder="Email Address">
+
+        <input
+          type="password"
+          id="login-password"
+          placeholder="Password">
+
+        <button class="btn-primary full-btn"
+          onclick="login()">
+
+          Login
+
+        </button>
+
+      </div>
+
+
+      <!-- SIGNUP -->
+      <div class="form-box signup-box">
+
+        <h2>Create Account</h2>
+
+        <input
+          type="email"
+          id="signup-email"
+          placeholder="Email Address">
+
+        <input
+          type="password"
+          id="signup-password"
+          placeholder="Password">
+
+        <button class="btn-secondary full-btn"
+          onclick="signup()">
+
+          Create Account
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- FIREBASE -->
+  <script type="module">
+
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+      signOut
+    }
+
+    from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+
+
+    // FIREBASE CONFIG
+    const firebaseConfig = {
+
+      apiKey: "AIzaSyAoqjlknPlxZC2tIX2TuZeGvlpifFbKVUY",
+
+      authDomain: "svorq-77106.firebaseapp.com",
+
+      projectId: "svorq-77106",
+
+      storageBucket: "svorq-77106.firebasestorage.app",
+
+      messagingSenderId: "925988634987",
+
+      appId: "1:925988634987:web:f31c8da3459914a5ce0c2e"
+
+    };
+
+
+
+    // INIT
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+
+
+    // SIGNUP
+    window.signup = function () {
+
+      const email =
+        document.getElementById("signup-email").value;
+
+      const password =
+        document.getElementById("signup-password").value;
+
+      createUserWithEmailAndPassword(auth, email, password)
+
+        .then(() => {
+
+          alert("Account created ❤️");
+
+          window.location.href = "index.html";
+
+        })
+
+        .catch((error) => {
+
+          alert(error.message);
+
+        });
+
+    };
+
+
+
+    // LOGIN
+    window.login = function () {
+
+      const email =
+        document.getElementById("login-email").value;
+
+      const password =
+        document.getElementById("login-password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+
+        .then(() => {
+
+          alert("Login successful ✨");
+
+          window.location.href = "index.html";
+
+        })
+
+        .catch((error) => {
+
+          alert(error.message);
+
+        });
+
+    };
+
+
+
+    // USER SESSION
+    onAuthStateChanged(auth, (user) => {
+
+      if (user) {
+
+        localStorage.setItem(
+          "svorq_user",
+          user.email
+        );
+
+      } else {
+
+        localStorage.removeItem(
+          "svorq_user"
+        );
+
+      }
+
+    });
+
+  </script>
+
+</body>
+
+</html>
