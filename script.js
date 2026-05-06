@@ -203,3 +203,49 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
   updateWishlistCount();
 });
+// ================= USER SYSTEM =================
+
+// SHOW LOGGED USER
+const userEmail = localStorage.getItem("svorq_user");
+const userName = localStorage.getItem("svorq_name");
+
+const userBox = document.getElementById("user-email");
+
+if(userBox){
+
+  if(userName){
+
+    userBox.innerHTML = `
+      <i class="fas fa-user-circle"></i>
+      ${userName}
+    `;
+
+  } else if(userEmail){
+
+    userBox.innerHTML = `
+      <i class="fas fa-user-circle"></i>
+      ${userEmail.split("@")[0]}
+    `;
+
+  } else {
+
+    userBox.innerHTML = `
+      <i class="fas fa-user"></i>
+    `;
+
+  }
+
+}
+
+
+// LOGOUT FUNCTION
+function logout(){
+
+  localStorage.removeItem("svorq_user");
+  localStorage.removeItem("svorq_name");
+
+  alert("Logged out");
+
+  window.location.href = "login.html";
+
+}
