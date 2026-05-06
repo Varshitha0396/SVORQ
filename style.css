@@ -558,3 +558,16 @@ img{
   }
 
 }
+.user-email{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  font-weight:600;
+  color:#c3996b;
+  cursor:pointer;
+}
+
+.user-email i{
+  font-size:16px;
+}
