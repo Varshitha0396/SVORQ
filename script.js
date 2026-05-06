@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // SHOW LOGGED USER
 const userEmail = localStorage.getItem("svorq_user");
-const userName = localStorage.getItem("svorq_name");
+const userName = localStorage.getItem("svorq_display");
 
 const userBox = document.getElementById("user-email");
 
