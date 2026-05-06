@@ -73,24 +73,24 @@
 
 
       <!-- SIGNUP -->
-<div class="form-box signup-box">
+      <div class="form-box signup-box">
 
-  <h2>Create Account</h2>
+        <h2>Create Account</h2>
 
-  <input
-  type="text"
-  id="signup-name"
-  placeholder="Full Name">
+        <input
+          type="text"
+          id="signup-name"
+          placeholder="Full Name">
 
-  <input
-  type="email"
-  id="signup-email"
-  placeholder="Email Address">
+        <input
+          type="email"
+          id="signup-email"
+          placeholder="Email Address">
 
-  <input
-  type="password"
-  id="signup-password"
-  placeholder="Password">
+        <input
+          type="password"
+          id="signup-password"
+          placeholder="Password">
 
         <button class="btn-secondary full-btn"
           onclick="signup()">
@@ -117,8 +117,7 @@
       getAuth,
       createUserWithEmailAndPassword,
       signInWithEmailAndPassword,
-      onAuthStateChanged,
-      signOut
+      onAuthStateChanged
     }
 
     from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
@@ -154,11 +153,22 @@
     // SIGNUP
     window.signup = function () {
 
+      const name =
+        document.getElementById("signup-name").value;
+
       const email =
         document.getElementById("signup-email").value;
 
       const password =
         document.getElementById("signup-password").value;
+
+
+      // SAVE NAME
+      localStorage.setItem(
+        "svorq_name",
+        name
+      );
+
 
       createUserWithEmailAndPassword(auth, email, password)
 
@@ -214,6 +224,18 @@
 
       if (user) {
 
+        const savedName =
+          localStorage.getItem("svorq_name");
+
+        if(savedName){
+
+          localStorage.setItem(
+            "svorq_display",
+            savedName
+          );
+
+        }
+
         localStorage.setItem(
           "svorq_user",
           user.email
@@ -223,6 +245,10 @@
 
         localStorage.removeItem(
           "svorq_user"
+        );
+
+        localStorage.removeItem(
+          "svorq_display"
         );
 
       }
